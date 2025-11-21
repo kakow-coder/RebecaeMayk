@@ -71,6 +71,22 @@ const giftItems: GiftItem[] = [
 
 const categories = ["Cozinha", "Banheiro", "Lavanderia", "Sala e Quarto"];
 
+const colorNote = "Os presentes devem ser nas cores branca ou preta";
+
+// Função para gerar cor de fundo aleatória mas consistente
+const getEmojiBackgroundColor = (id: string) => {
+  const colors = [
+    "from-blue-100 to-blue-50",
+    "from-purple-100 to-purple-50",
+    "from-pink-100 to-pink-50",
+    "from-green-100 to-green-50",
+    "from-yellow-100 to-yellow-50",
+    "from-indigo-100 to-indigo-50",
+  ];
+  const index = parseInt(id) % colors.length;
+  return colors[index];
+};
+
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedGifts, setSelectedGifts] = useState<Map<string, SelectedGift>>(new Map());
@@ -157,6 +173,15 @@ export default function Home() {
           <p className="text-base text-foreground/70">
             Escolha um ou mais itens da lista abaixo. Sua presença é o mais importante!
           </p>
+          <div className="mt-8 p-4 bg-accent/10 rounded-lg border-2 border-accent">
+            <p className="text-sm font-semibold text-accent uppercase tracking-wide mb-2">
+              🌟 Informação Importante
+            </p>
+            <p className="text-base text-foreground">
+              Os presentes da lista devem ser preferencialmente nas cores <span className="font-bold">branca ou preta</span>, 
+              para combinar com a decoração do nosso casamento.
+            </p>
+          </div>
         </div>
       </section>
 
