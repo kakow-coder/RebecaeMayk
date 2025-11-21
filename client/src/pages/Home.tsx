@@ -1,12 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Gift } from "lucide-react";
 import { useState } from "react";
+import { NameModal } from "@/components/NameModal";
 
 interface GiftItem {
   id: string;
   name: string;
   category: string;
   image: string;
+}
+
+interface SelectedGift {
+  itemId: string;
+  itemName: string;
+  selectedBy: string;
 }
 
 const giftItems: GiftItem[] = [
@@ -66,20 +73,48 @@ const categories = ["Cozinha", "Banheiro", "Lavanderia", "Sala e Quarto"];
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedGifts, setSelectedGifts] = useState<Set<string>>(new Set());
+  const [selectedGifts, setSelectedGifts] = useState<Map<string, SelectedGift>>(new Map());
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pendingItemId, setPendingItemId] = useState<string | null>(null);
+  const [pendingItemName, setPendingItemName] = useState<string>("");
 
   const filteredItems = selectedCategory
     ? giftItems.filter((item) => item.category === selectedCategory)
     : giftItems;
 
-  const toggleGiftSelection = (id: string) => {
-    const newSelected = new Set(selectedGifts);
-    if (newSelected.has(id)) {
+  const handleSelectGift = (id: string, name: string) => {
+    if (selectedGifts.has(id)) {
+      // Se já foi selecionado, remove
+      const newSelected = new Map(selectedGifts);
       newSelected.delete(id);
+      setSelectedGifts(newSelected);
     } else {
-      newSelected.add(id);
+      // Se não foi selecionado, abre modal para pedir nome
+      setPendingItemId(id);
+      setPendingItemName(name);
+      setIsModalOpen(true);
     }
-    setSelectedGifts(newSelected);
+  };
+
+  const handleConfirmName = (name: string) => {
+    if (pendingItemId) {
+      const newSelected = new Map(selectedGifts);
+      newSelected.set(pendingItemId, {
+        itemId: pendingItemId,
+        itemName: pendingItemName,
+        selectedBy: name,
+      });
+      setSelectedGifts(newSelected);
+    }
+    setIsModalOpen(false);
+    setPendingItemId(null);
+    setPendingItemName("");
+  };
+
+  const handleCancelModal = () => {
+    setIsModalOpen(false);
+    setPendingItemId(null);
+    setPendingItemName("");
   };
 
   return (
@@ -158,47 +193,55 @@ export default function Home() {
           </h2>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filteredItems.map((item) => (
-              <div
-                key={item.id}
-                className="group cursor-pointer rounded-lg border-2 border-border bg-white transition-all hover:shadow-lg hover:border-accent"
-                onClick={() => toggleGiftSelection(item.id)}
-              >
-                {/* Imagem do Produto */}
-                <div className="relative h-48 overflow-hidden rounded-t-md bg-accent/10">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23f0f0f0' width='200' height='200'/%3E%3Ctext x='50%' y='50%' font-size='14' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EImagem não disponível%3C/text%3E%3C/svg%3E";
-                    }}
-                  />
-                  {selectedGifts.has(item.id) && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-accent/80">
-                      <Gift className="h-8 w-8 text-white" />
-                    </div>
-                  )}
-                </div>
+            {filteredItems.map((item) => {
+              const isSelected = selectedGifts.has(item.id);
+              const selectedGift = selectedGifts.get(item.id);
 
-                {/* Informações do Produto */}
-                <div className="space-y-3 p-4">
-                  <p className="text-sm font-semibold text-accent uppercase tracking-wide">
-                    {item.category}
-                  </p>
-                  <h3 className="text-lg font-semibold text-foreground line-clamp-2">
-                    {item.name}
-                  </h3>
-                  <Button
-                    variant={selectedGifts.has(item.id) ? "default" : "outline"}
-                    className="w-full rounded-lg"
-                    size="sm"
-                  >
-                    {selectedGifts.has(item.id) ? "Selecionado ✓" : "Selecionar"}
-                  </Button>
+              return (
+                <div
+                  key={item.id}
+                  className="group rounded-lg border-2 border-border bg-white transition-all hover:shadow-lg hover:border-accent"
+                >
+                  {/* Imagem do Produto */}
+                  <div className="relative h-48 overflow-hidden rounded-t-md bg-accent/10">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23f0f0f0' width='200' height='200'/%3E%3Ctext x='50%' y='50%' font-size='14' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EImagem não disponível%3C/text%3E%3C/svg%3E";
+                      }}
+                    />
+                    {isSelected && (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-accent/80 space-y-2">
+                        <Gift className="h-8 w-8 text-white" />
+                        <p className="text-xs text-white font-semibold text-center px-2">
+                          {selectedGift?.selectedBy}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Informações do Produto */}
+                  <div className="space-y-3 p-4">
+                    <p className="text-sm font-semibold text-accent uppercase tracking-wide">
+                      {item.category}
+                    </p>
+                    <h3 className="text-lg font-semibold text-foreground line-clamp-2">
+                      {item.name}
+                    </h3>
+                    <Button
+                      onClick={() => handleSelectGift(item.id, item.name)}
+                      variant={isSelected ? "default" : "outline"}
+                      className="w-full rounded-lg"
+                      size="sm"
+                    >
+                      {isSelected ? "Já selecionado ✓" : "Selecionar"}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {filteredItems.length === 0 && (
@@ -225,6 +268,14 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* Modal de Nome */}
+      <NameModal
+        isOpen={isModalOpen}
+        itemName={pendingItemName}
+        onConfirm={handleConfirmName}
+        onCancel={handleCancelModal}
+      />
     </div>
   );
 }

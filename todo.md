@@ -26,6 +26,9 @@
 
 ## Testes e Validação
 
+- [x] Modal para captura de nome do presenteador
+- [x] Armazenamento de seleções com nome da pessoa
+- [x] Botão "Já selecionado" após confirmação
 - [ ] Testes unitários com vitest
 - [x] Verificar responsividade em dispositivos móveis
 - [x] Testar navegação e links
