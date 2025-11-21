@@ -34,31 +34,31 @@ const giftItems: GiftItem[] = [
   { id: "14", name: "Colher de Arroz", category: "Cozinha", emoji: "🥄" },
   { id: "15", name: "Socador", category: "Cozinha", emoji: "🔨" },
   { id: "16", name: "Colheres de Pau ou Silicone", category: "Cozinha", emoji: "🥄" },
-  { id: "17", name: "Pegador", category: "Cozinha", emoji: "🪓" },
+  { id: "17", name: "Pegador", category: "Cozinha", emoji: "​​🥢​" },
   { id: "18", name: "Tigelas", category: "Cozinha", emoji: "🥣" },
   { id: "19", name: "Colher de Sorvete", category: "Cozinha", emoji: "🍦" },
   { id: "20", name: "Jarros", category: "Cozinha", emoji: "🏺" },
   { id: "21", name: "Sanduicheira", category: "Cozinha", emoji: "🥪" },
-  { id: "22", name: "Garrafa Térmica", category: "Cozinha", emoji: "🧊" },
+  { id: "22", name: "Garrafa Térmica", category: "Cozinha", emoji: "🍶​" },
   { id: "23", name: "Formas para Bolo", category: "Cozinha", emoji: "🎂" },
   { id: "24", name: "Luva Térmica", category: "Cozinha", emoji: "🧤" },
   { id: "25", name: "Cuscuzeira", category: "Cozinha", emoji: "🥘" },
   { id: "26", name: "Conchas para Feijão", category: "Cozinha", emoji: "🥄" },
   { id: "27", name: "Escorredor de Louça e Talheres", category: "Cozinha", emoji: "🍽️" },
   { id: "28", name: "Formas de Pudim", category: "Cozinha", emoji: "🍮" },
-  { id: "29", name: "Mixer", category: "Cozinha", emoji: "⚙️" },
+  { id: "29", name: "Mixer", category: "Cozinha", emoji: "​​🧋​" },
   { id: "30", name: "Espremedor de Frutas", category: "Cozinha", emoji: "🍊" },
 
   // Itens de Banheiro
   { id: "31", name: "Toalhas de Banho", category: "Banheiro", emoji: "🛁" },
-  { id: "32", name: "Tapete", category: "Banheiro", emoji: "🧵" },
+  { id: "32", name: "Tapete", category: "Banheiro", emoji: "​​🎴​" },
   { id: "33", name: "Lixeira", category: "Banheiro", emoji: "🗑️" },
 
   // Itens de Lavanderia
   { id: "34", name: "Mopi", category: "Lavanderia", emoji: "🧹" },
   { id: "35", name: "Baldes", category: "Lavanderia", emoji: "🪣" },
   { id: "36", name: "Varal de Roupa de Chão", category: "Lavanderia", emoji: "👕" },
-  { id: "37", name: "Panos de Chão", category: "Lavanderia", emoji: "🧹" },
+  { id: "37", name: "Panos de Chão", category: "Lavanderia", emoji: "​​🎴​" },
 
   // Itens de Sala e Quarto
   { id: "38", name: "Mantas do Sofá", category: "Sala e Quarto", emoji: "🛋️" },
@@ -66,7 +66,7 @@ const giftItems: GiftItem[] = [
   { id: "40", name: "Edredom", category: "Sala e Quarto", emoji: "🛏️" },
   { id: "41", name: "Cobre Leito", category: "Sala e Quarto", emoji: "🛏️" },
   { id: "42", name: "Fronhas", category: "Sala e Quarto", emoji: "🛏️" },
-  { id: "43", name: "Colcha", category: "Sala e Quarto", emoji: "🧵" },
+  { id: "43", name: "Colcha", category: "Sala e Quarto", emoji: "​​🎴​" },
 ];
 
 const categories = ["Cozinha", "Banheiro", "Lavanderia", "Sala e Quarto"];
@@ -179,7 +179,7 @@ export default function Home() {
             </p>
             <p className="text-base text-foreground">
               Os presentes da lista devem ser preferencialmente nas cores <span className="font-bold">branca ou preta</span>, 
-              para combinar com a decoração do nosso casamento.
+              para combinar com a decoração da nossa casa.
             </p>
           </div>
         </div>
