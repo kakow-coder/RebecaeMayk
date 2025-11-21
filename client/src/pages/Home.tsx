@@ -282,7 +282,7 @@ export default function Home() {
             Rebeca & Mayk
           </p>
           <p className="text-xs opacity-75">
-            © 2024 Chá de Panela. Todos os direitos reservados.
+            © 2025 Chá de Panela Rebeca & Mayk. Todos os direitos reservados.
           </p>
         </div>
       </section>
