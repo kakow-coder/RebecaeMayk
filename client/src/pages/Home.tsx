@@ -7,7 +7,7 @@ interface GiftItem {
   id: string;
   name: string;
   category: string;
-  emoji: string;
+  image: string;
 }
 
 interface SelectedGift {
@@ -18,74 +18,58 @@ interface SelectedGift {
 
 const giftItems: GiftItem[] = [
   // Itens de Cozinha
-  { id: "1", name: "Jogo de Panela", category: "Cozinha", emoji: "🍳" },
-  { id: "2", name: "Panela de Pressão", category: "Cozinha", emoji: "🫖" },
-  { id: "3", name: "Jogo de Talheres", category: "Cozinha", emoji: "🍴" },
-  { id: "4", name: "Jogo de Copos", category: "Cozinha", emoji: "🥤" },
-  { id: "5", name: "Jogo de Taças", category: "Cozinha", emoji: "🍷" },
-  { id: "6", name: "Jogo de Xícara", category: "Cozinha", emoji: "☕" },
-  { id: "7", name: "Jogo de Faca", category: "Cozinha", emoji: "🔪" },
-  { id: "8", name: "Descanso de Panela", category: "Cozinha", emoji: "🍳" },
-  { id: "9", name: "Pano de Prato", category: "Cozinha", emoji: "🧻" },
-  { id: "10", name: "Jogo Americano", category: "Cozinha", emoji: "🍽️" },
-  { id: "11", name: "Toalha de Mesa", category: "Cozinha", emoji: "🧺" },
-  { id: "12", name: "Potes de Mantimentos", category: "Cozinha", emoji: "🏺" },
-  { id: "13", name: "Cortador de Pizza e Bolo", category: "Cozinha", emoji: "🍕" },
-  { id: "14", name: "Colher de Arroz", category: "Cozinha", emoji: "🥄" },
-  { id: "15", name: "Socador", category: "Cozinha", emoji: "🔨" },
-  { id: "16", name: "Colheres de Pau ou Silicone", category: "Cozinha", emoji: "🥄" },
-  { id: "17", name: "Pegador", category: "Cozinha", emoji: "🪓" },
-  { id: "18", name: "Tigelas", category: "Cozinha", emoji: "🥣" },
-  { id: "19", name: "Colher de Sorvete", category: "Cozinha", emoji: "🍦" },
-  { id: "20", name: "Jarros", category: "Cozinha", emoji: "🏺" },
-  { id: "21", name: "Sanduicheira", category: "Cozinha", emoji: "🥪" },
-  { id: "22", name: "Garrafa Térmica", category: "Cozinha", emoji: "🧊" },
-  { id: "23", name: "Formas para Bolo", category: "Cozinha", emoji: "🎂" },
-  { id: "24", name: "Luva Térmica", category: "Cozinha", emoji: "🧤" },
-  { id: "25", name: "Cuscuzeira", category: "Cozinha", emoji: "🥘" },
-  { id: "26", name: "Conchas para Feijão", category: "Cozinha", emoji: "🥄" },
-  { id: "27", name: "Escorredor de Louça e Talheres", category: "Cozinha", emoji: "🍽️" },
-  { id: "28", name: "Formas de Pudim", category: "Cozinha", emoji: "🍮" },
-  { id: "29", name: "Mixer", category: "Cozinha", emoji: "⚙️" },
-  { id: "30", name: "Espremedor de Frutas", category: "Cozinha", emoji: "🍊" },
+  { id: "1", name: "Jogo de Panela", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "2", name: "Panela de Pressão", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "3", name: "Jogo de Talheres", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "4", name: "Jogo de Copos", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "5", name: "Jogo de Taças", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "6", name: "Jogo de Xícara", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "7", name: "Jogo de Faca", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "8", name: "Descanso de Panela", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "9", name: "Pano de Prato", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "10", name: "Jogo Americano", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "11", name: "Toalha de Mesa", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "12", name: "Potes de Mantimentos", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "13", name: "Cortador de Pizza e Bolo", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "14", name: "Colher de Arroz", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "15", name: "Socador", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "16", name: "Colheres de Pau ou Silicone", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "17", name: "Pegador", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "18", name: "Tigelas", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "19", name: "Colher de Sorvete", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "20", name: "Jarros", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "21", name: "Sanduicheira", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "22", name: "Garrafa Térmica", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "23", name: "Formas para Bolo", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "24", name: "Luva Térmica", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "25", name: "Cuscuzeira", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "26", name: "Conchas para Feijão", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "27", name: "Escorredor de Louça e Talheres", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "28", name: "Formas de Pudim", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "29", name: "Mixer", category: "Cozinha", image: "/placeholder.jpg" },
+  { id: "30", name: "Espremedor de Frutas", category: "Cozinha", image: "/placeholder.jpg" },
 
   // Itens de Banheiro
-  { id: "31", name: "Toalhas de Banho", category: "Banheiro", emoji: "🛁" },
-  { id: "32", name: "Tapete", category: "Banheiro", emoji: "🧵" },
-  { id: "33", name: "Lixeira", category: "Banheiro", emoji: "🗑️" },
+  { id: "31", name: "Toalhas de Banho", category: "Banheiro", image: "/placeholder.jpg" },
+  { id: "32", name: "Tapete", category: "Banheiro", image: "/placeholder.jpg" },
+  { id: "33", name: "Lixeira", category: "Banheiro", image: "/placeholder.jpg" },
 
   // Itens de Lavanderia
-  { id: "34", name: "Mopi", category: "Lavanderia", emoji: "🧹" },
-  { id: "35", name: "Baldes", category: "Lavanderia", emoji: "🪣" },
-  { id: "36", name: "Varal de Roupa de Chão", category: "Lavanderia", emoji: "👕" },
-  { id: "37", name: "Panos de Chão", category: "Lavanderia", emoji: "🧹" },
+  { id: "34", name: "Mopi", category: "Lavanderia", image: "/placeholder.jpg" },
+  { id: "35", name: "Baldes", category: "Lavanderia", image: "/placeholder.jpg" },
+  { id: "36", name: "Varal de Roupa de Chão", category: "Lavanderia", image: "/placeholder.jpg" },
+  { id: "37", name: "Panos de Chão", category: "Lavanderia", image: "/placeholder.jpg" },
 
   // Itens de Sala e Quarto
-  { id: "38", name: "Mantas do Sofá", category: "Sala e Quarto", emoji: "🛋️" },
-  { id: "39", name: "Lençóis", category: "Sala e Quarto", emoji: "🛏️" },
-  { id: "40", name: "Edredom", category: "Sala e Quarto", emoji: "🛏️" },
-  { id: "41", name: "Cobre Leito", category: "Sala e Quarto", emoji: "🛏️" },
-  { id: "42", name: "Fronhas", category: "Sala e Quarto", emoji: "🛏️" },
-  { id: "43", name: "Colcha", category: "Sala e Quarto", emoji: "🧵" },
+  { id: "38", name: "Mantas do Sofá", category: "Sala e Quarto", image: "/placeholder.jpg" },
+  { id: "39", name: "Lençóis", category: "Sala e Quarto", image: "/placeholder.jpg" },
+  { id: "40", name: "Edredom", category: "Sala e Quarto", image: "/placeholder.jpg" },
+  { id: "41", name: "Cobre Leito", category: "Sala e Quarto", image: "/placeholder.jpg" },
+  { id: "42", name: "Fronhas", category: "Sala e Quarto", image: "/placeholder.jpg" },
+  { id: "43", name: "Colcha", category: "Sala e Quarto", image: "/placeholder.jpg" },
 ];
 
 const categories = ["Cozinha", "Banheiro", "Lavanderia", "Sala e Quarto"];
-
-const colorNote = "Os presentes devem ser nas cores branca ou preta";
-
-// Função para gerar cor de fundo aleatória mas consistente
-const getEmojiBackgroundColor = (id: string) => {
-  const colors = [
-    "from-blue-100 to-blue-50",
-    "from-purple-100 to-purple-50",
-    "from-pink-100 to-pink-50",
-    "from-green-100 to-green-50",
-    "from-yellow-100 to-yellow-50",
-    "from-indigo-100 to-indigo-50",
-  ];
-  const index = parseInt(id) % colors.length;
-  return colors[index];
-};
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -229,8 +213,15 @@ export default function Home() {
                   onClick={() => handleSelectGift(item.id, item.name)}
                 >
                   {/* Imagem do Produto */}
-                  <div className="relative h-48 overflow-hidden rounded-t-md bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center">
-                    <div className="text-6xl">{item.emoji}</div>
+                  <div className="relative h-48 overflow-hidden rounded-t-md bg-accent/10">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = "/placeholder.jpg";
+                      }}
+                    />
                     {isSelected && (
                       <div className="absolute inset-0 flex flex-col items-center justify-center bg-accent/80 space-y-2">
                         <Gift className="h-8 w-8 text-white" />
