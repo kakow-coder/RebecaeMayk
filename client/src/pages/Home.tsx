@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Gift } from "lucide-react";
-import { useState } from "react";
+import { Heart, Gift, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
 import { NameModal } from "@/components/NameModal";
+import { trpc } from "@/lib/trpc";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 interface GiftItem {
   id: string;
@@ -72,11 +74,31 @@ const giftItems: GiftItem[] = [
 const categories = ["Cozinha", "Banheiro", "Lavanderia", "Sala e Quarto"];
 
 export default function Home() {
+  const { user } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedGifts, setSelectedGifts] = useState<Map<string, SelectedGift>>(new Map());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pendingItemId, setPendingItemId] = useState<string | null>(null);
   const [pendingItemName, setPendingItemName] = useState<string>("");
+
+  // Carregar seleções do banco de dados
+  const { data: selections, isLoading } = trpc.gifts.getSelections.useQuery();
+  const saveMutation = trpc.gifts.saveSelection.useMutation();
+  const removeMutation = trpc.gifts.removeSelection.useMutation();
+
+  useEffect(() => {
+    if (selections) {
+      const map = new Map<string, SelectedGift>();
+      selections.forEach((sel: any) => {
+        map.set(sel.giftId, {
+          itemId: sel.giftId,
+          itemName: sel.giftName,
+          selectedBy: sel.selectedBy,
+        });
+      });
+      setSelectedGifts(map);
+    }
+  }, [selections]);
 
   const filteredItems = selectedCategory
     ? giftItems.filter((item) => item.category === selectedCategory)
@@ -84,12 +106,13 @@ export default function Home() {
 
   const handleSelectGift = (id: string, name: string) => {
     if (selectedGifts.has(id)) {
-      // Se já foi selecionado, remove
+      // Remove selection
+      removeMutation.mutate({ giftId: id });
       const newSelected = new Map(selectedGifts);
       newSelected.delete(id);
       setSelectedGifts(newSelected);
     } else {
-      // Se não foi selecionado, abre modal para pedir nome
+      // Open modal to ask for name
       setPendingItemId(id);
       setPendingItemName(name);
       setIsModalOpen(true);
@@ -98,6 +121,11 @@ export default function Home() {
 
   const handleConfirmName = (name: string) => {
     if (pendingItemId) {
+      saveMutation.mutate({
+        giftId: pendingItemId,
+        giftName: pendingItemName,
+        selectedBy: name,
+      });
       const newSelected = new Map(selectedGifts);
       newSelected.set(pendingItemId, {
         itemId: pendingItemId,
@@ -116,6 +144,14 @@ export default function Home() {
     setPendingItemId(null);
     setPendingItemName("");
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-accent" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -217,7 +253,7 @@ export default function Home() {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                      className="h-full w-full object-contain bg-gray-100 transition-transform group-hover:scale-105"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = "/placeholder.jpg";
                       }}
@@ -244,6 +280,7 @@ export default function Home() {
                       variant={isSelected ? "default" : "outline"}
                       className="w-full rounded-lg"
                       size="sm"
+                      disabled={saveMutation.isPending || removeMutation.isPending}
                     >
                       {isSelected ? "Já selecionado ✓" : "Selecionar"}
                     </Button>

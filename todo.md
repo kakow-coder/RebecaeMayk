@@ -29,7 +29,9 @@
 - [x] Modal para captura de nome do presenteador
 - [x] Armazenamento de seleções com nome da pessoa
 - [x] Botão "Já selecionado" após confirmação
-- [ ] Testes unitários com vitest
+- [x] Banco de dados para persistência de seleções
+- [x] API tRPC para salvar e recuperar seleções
+- [x] Testes unitários com vitest
 - [x] Verificar responsividade em dispositivos móveis
 - [x] Testar navegação e links
 - [x] Validar carregamento de imagens
@@ -37,5 +39,5 @@
 
 ## Deployment
 
-- [ ] Criar checkpoint final
-- [ ] Publicar página
+- [x] Criar checkpoint final
+- [x] Publicar página
