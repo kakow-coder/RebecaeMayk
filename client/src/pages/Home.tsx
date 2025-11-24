@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Gift, Loader2 } from "lucide-react";
+import { Heart, Gift, Loader2, Settings } from "lucide-react";
 import { useState, useEffect } from "react";
 import { NameModal } from "@/components/NameModal";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useLocation } from "wouter";
 
 interface GiftItem {
   id: string;
@@ -72,6 +73,21 @@ const giftItems: GiftItem[] = [
 ];
 
 const categories = ["Cozinha", "Banheiro", "Lavanderia", "Sala e Quarto"];
+
+function AdminButton() {
+  const [, setLocation] = useLocation();
+  
+  return (
+    <button
+      onClick={() => setLocation("/admin")}
+      className="inline-flex items-center gap-2 px-3 py-2 text-xs rounded-md bg-accent/20 hover:bg-accent/30 text-accent transition-colors mt-4"
+      title="Painel de Administrador"
+    >
+      <Settings className="h-4 w-4" />
+      Painel
+    </button>
+  );
+}
 
 export default function Home() {
   const { user } = useAuth();
@@ -312,6 +328,7 @@ export default function Home() {
           <p className="text-xs opacity-75">
             © 2024 Chá de Panela. Todos os direitos reservados.
           </p>
+          <AdminButton />
         </div>
       </section>
 
